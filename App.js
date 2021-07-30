@@ -1,40 +1,35 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
+
+const colors = [
+  { name: 'red', id: '1' },
+  { name: 'blue', id: '2' },
+  { name: 'orange', id: '3' },
+  { name: 'purple', id: '4' },
+  { name: 'yellow', id: '5' },
+  { name: 'green', id: '6' },
+  { name: 'pink', id: '7' },
+  { name: 'brown', id: '8' },
+]
 
 export default function App() {
 
-  const [name, setName] = useState('vertika')
-  const [age, setAge] = useState(5)
-
-  const pressHandler = () => {
-    setName('abc')
-    setPerson({ name: 'xyz', age: 13 })
-  }
-
   return (
     <View style={styles.container}>
+      {<FlatList
+        numColumns={2}
+        keyExtractor={item => item.id}
+        data={colors}
+        renderItem={({ item }) => ( // has to be named as "item"
+          <Text style={colorStyles(item.name)}>{item.name}</Text>
+        )}
+      />}
 
-      <View style={styles.header}>
-        <Text>Name is <Text style={styles.boldText}>{name}</Text> !</Text>
-        <Text>Age is {age} </Text>
-      </View>
-      <TextInput
-        style={styles.input}
-        placeholder='e.g. Vertika'
-        onChangeText={(val) => setName(val)}
-        multiline>
-      </TextInput>
-      <TextInput
-        style={styles.input}
-        placeholder='e.g. 10'
-        onChangeText={(val) => setAge(val)}
-        keyboardType={'numeric'}>
-      </TextInput>
-
-      <View style={styles.buttonContainer}>
-        <Button title='update state' onPress={pressHandler} />
-      </View>
-
+      <ScrollView>
+        {colors.map(color =>
+          <Text key={color.id} style={colorStyles(color.name)}>{color.name}</Text>
+        )}
+      </ScrollView>
     </View>
   );
 }
@@ -43,29 +38,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    backgroundColor: "pink",
-    padding: 20
-  },
-  boldText: {
-    fontWeight: 'bold'
-  },
-  body: {
-    backgroundColor: "yellow",
-    padding: 20,
-    alignItems: 'center'
-  },
-  buttonContainer: {
-    marginTop: 20
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'blue',
-    margin: 10,
-    padding: 8,
-    width: 200
+    paddingTop: 40,
+    paddingHorizontal: 20
+    // alignItems: 'center',
+    // justifyContent: 'center',
   }
 });
+
+const colorStyles = (color) => {
+  return {
+    marginTop: 20,
+    padding: 30,
+    backgroundColor: color,
+    color: "white",
+    marginHorizontal: 10
+  }
+}
