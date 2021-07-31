@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList, Touchable, TouchableOpacity } from 'react-native';
 
 const colors = [
   { name: 'red', id: '1' },
@@ -14,22 +14,22 @@ const colors = [
 
 export default function App() {
 
+  const pressHandler = (id) => {
+    console.log(id);
+  }
+
   return (
     <View style={styles.container}>
-      {<FlatList
+      <FlatList
         numColumns={2}
         keyExtractor={item => item.id}
         data={colors}
         renderItem={({ item }) => ( // has to be named as "item"
-          <Text style={colorStyles(item.name)}>{item.name}</Text>
+          <TouchableOpacity onPress={() => pressHandler(item.id)}>
+            <Text style={colorStyles(item.name)}>{item.name}</Text>
+          </TouchableOpacity>
         )}
-      />}
-
-      <ScrollView>
-        {colors.map(color =>
-          <Text key={color.id} style={colorStyles(color.name)}>{color.name}</Text>
-        )}
-      </ScrollView>
+      />
     </View>
   );
 }
