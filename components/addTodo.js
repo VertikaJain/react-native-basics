@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     borderBottomColor: '#6800b3',
     borderBottomWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 10
+    borderStyle: 'solid'
   }
 })
 

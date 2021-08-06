@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
 import DoneTodoItem from './components/doneTodoItem';
@@ -18,7 +18,12 @@ export default function App() {
 
   // Add new todo to the list
   const handleButtonPress = (newTodo) => {
-    setTodos([...todos, { text: newTodo, key: Math.random().toString() }])
+    if (newTodo.length > 3)
+      setTodos([...todos, { text: newTodo, key: Math.random().toString() }])
+    else
+      Alert.alert('OOPS!', 'Todo must be atleast 3 characters long.', [
+        { text: 'Gotcha!', onPress: () => console.log('alert closed.') }
+      ])
   }
 
   // Removes task fron todos and adds it to doneTodos list
