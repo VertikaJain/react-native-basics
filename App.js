@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
 import DoneTodoItem from './components/doneTodoItem';
@@ -33,28 +33,31 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <AddTodo handleButtonPress={handleButtonPress} />
-        <Text style={styles.subTitle}>Todos</Text>
-        <View style={styles.list}>
-          <FlatList
-            data={todos}
-            renderItem={({ item }) => (
-              <TodoItem item={item} taskPressHandler={taskPressHandler} />
-            )}
-          />
-        </View>
-        <Text style={styles.subTitle}>Done Tasks</Text>
-        <View style={styles.list}>
-          <FlatList
-            data={doneTodos}
-            renderItem={({ item }) => <DoneTodoItem item={item} />}
-          />
+    <TouchableWithoutFeedback
+      onPress={() => Keyboard.dismiss()} >
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <AddTodo handleButtonPress={handleButtonPress} />
+          <Text style={styles.subTitle}>Todos</Text>
+          <View style={styles.list}>
+            <FlatList
+              data={todos}
+              renderItem={({ item }) => (
+                <TodoItem item={item} taskPressHandler={taskPressHandler} />
+              )}
+            />
+          </View>
+          <Text style={styles.subTitle}>Done Tasks</Text>
+          <View style={styles.list}>
+            <FlatList
+              data={doneTodos}
+              renderItem={({ item }) => <DoneTodoItem item={item} />}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
