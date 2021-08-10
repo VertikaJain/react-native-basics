@@ -4,6 +4,7 @@ import Header from './components/header';
 import TodoItem from './components/todoItem';
 import DoneTodoItem from './components/doneTodoItem';
 import AddTodo from './components/addTodo';
+// import Sandbox from './components/sandbox';
 
 export default function App() {
 
@@ -33,6 +34,7 @@ export default function App() {
   }
 
   return (
+    // <Sandbox/>
     <TouchableWithoutFeedback
       onPress={() => Keyboard.dismiss()} >
       <View style={styles.container}>
@@ -63,18 +65,22 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: '#fff'
   },
   content: {
+    flex: 1,
     paddingHorizontal: 40,
-    paddingVertical: 20
+    paddingVertical: 20,
   },
   list: {
-    marginBottom: 16
+    flex: 1,
+    marginBottom: 16,
   },
   subTitle: {
     fontWeight: 'bold',
     color: "#6800b3",
-    fontSize: 16
+    fontSize: 16,
+    paddingVertical:10
   }
 });
